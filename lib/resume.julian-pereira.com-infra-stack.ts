@@ -1,16 +1,40 @@
-import * as cdk from 'aws-cdk-lib';
-import { Construct } from 'constructs';
-// import * as sqs from 'aws-cdk-lib/aws-sqs';
+import {
+  StackProps,
+  Stack,
+  aws_codebuild as codebuild,
+  SecretValue,
+} from "aws-cdk-lib";
+import { Construct } from "constructs";
 
-export class ResumeJulianPereiraComInfraStack extends cdk.Stack {
-  constructor(scope: Construct, id: string, props?: cdk.StackProps) {
+export interface ResumeJulianPereiraComInfraStackProps extends StackProps {
+  readonly githubTokenSsmParameterName: string;
+  readonly repo: string;
+  readonly owner: string;
+}
+
+export class ResumeJulianPereiraComInfraStack extends Stack {
+  constructor(
+    scope: Construct,
+    id: string,
+    props: ResumeJulianPereiraComInfraStackProps,
+  ) {
     super(scope, id, props);
 
-    // The code that defines your stack goes here
+    const githubToken = new codebuild.GitHubSourceCredentials(
+      this,
+      `GithubSourceCredentials`,
+      {
+        accessToken: SecretValue.ssmSecure(
+          props.githubTokenSsmParameterName,
+          "1",
+        ),
+      },
+    );
 
-    // example resource
-    // const queue = new sqs.Queue(this, 'ResumeJulianPereiraComInfraQueue', {
-    //   visibilityTimeout: cdk.Duration.seconds(300)
-    // });
+    const source = codebuild.Source.gitHub({
+      owner: props.owner,
+      repo: props.repo,
+      webhook: true,
+    });
   }
 }
