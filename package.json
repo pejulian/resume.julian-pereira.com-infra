@@ -1,27 +1,43 @@
 {
-  "name": "resume.julian-pereira.com-infra",
-  "version": "0.1.0",
-  "bin": {
-    "resume.julian-pereira.com-infra": "bin/resume.julian-pereira.com-infra.js"
-  },
-  "scripts": {
-    "build": "tsc",
-    "watch": "tsc -w",
-    "test": "jest",
-    "cdk": "cdk"
-  },
-  "devDependencies": {
-    "@types/jest": "^29.5.12",
-    "@types/node": "20.14.9",
-    "jest": "^29.7.0",
-    "ts-jest": "^29.1.5",
-    "aws-cdk": "2.151.0",
-    "ts-node": "^10.9.2",
-    "typescript": "~5.5.3"
-  },
-  "dependencies": {
-    "aws-cdk-lib": "2.151.0",
-    "constructs": "^10.0.0",
-    "source-map-support": "^0.5.21"
-  }
+    "name": "resume.julian-pereira.com-infra",
+    "type": "module",
+    "version": "0.1.0",
+    "bin": {
+        "resume.julian-pereira.com-infra": "bin/resume.julian-pereira.com-infra.js"
+    },
+    "scripts": {
+        "build": "tsc",
+        "watch": "tsc -w",
+        "test": "jest",
+        "prettier:format": "prettier --write \"./{typings,etc,lib,bin,src,__events__,__mocks__}/**/*.{ts,js,tsx,jsx,cjs,mts,json,d.ts}\" --write \"**/{webpack.config,esbuild,build,esbuild.config,jest.config,tsconfig*,cdk}.{ts,js,json,cjs}\"",
+        "prettier:check": "prettier --list-different \"./{typings,etc,lib,bin,src,__events__,__mocks__}/**/*.{ts,js,tsx,jsx,cjs,mts,json,d.ts}\" --list-different \"**/{webpack.config,esbuild,build,esbuild.config,jest.config,tsconfig*,cdk}.{ts,js,json,cjs}\"",
+        "lint": "eslint --fix",
+        "cdk": "cdk",
+        "prepare": "husky"
+    },
+    "devDependencies": {
+        "@eslint/eslintrc": "^3.1.0",
+        "@eslint/js": "^9.8.0",
+        "@types/jest": "^29.5.12",
+        "@types/node": "20.14.9",
+        "@typescript-eslint/eslint-plugin": "^8.0.0",
+        "@typescript-eslint/parser": "^8.0.0",
+        "aws-cdk": "2.151.0",
+        "eslint": "^9.8.0",
+        "eslint-config-prettier": "^9.1.0",
+        "eslint-plugin-jest": "^28.7.0",
+        "eslint-plugin-prettier": "^5.2.1",
+        "globals": "^15.9.0",
+        "jest": "^29.7.0",
+        "lint-staged": "^15.2.8",
+        "prettier": "^3.3.3",
+        "ts-jest": "^29.1.5",
+        "ts-node": "^10.9.2",
+        "typescript": "~5.5.3"
+    },
+    "dependencies": {
+        "aws-cdk-lib": "2.151.0",
+        "constructs": "^10.0.0",
+        "source-map-support": "^0.5.21"
+    }
 }
